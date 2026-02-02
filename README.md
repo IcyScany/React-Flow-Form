@@ -1,73 +1,87 @@
-# React + TypeScript + Vite
+# React-Flow-Form
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+高性能低代码表单构建引擎
 
-Currently, two official plugins are available:
+## � 目录
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [产品定位](#产品定位)
+- [核心价值](#核心价值)
+- [功能模块](#功能模块)
+- [运作流程](#运作流程)
+- [技术架构](#技术架构)
+- [快速开始](#快速开始)
+- [开发路线](#开发路线)
 
-## React Compiler
+## 💡 产品定位
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+React-Flow-Form 是一款基于 React + TypeScript + Ant Design 的可视化表单建模平台。它通过"拖拽即所得"的交互方式，将复杂的业务表单抽象为标准的 JSON Schema 协议，实现了表单**设计（Editor）与渲染（Renderer）**的彻底解耦。
 
-## Expanding the ESLint configuration
+## 🚀 核心价值
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **开发者提效**：告别繁琐的 Form.Item 手写逻辑，一键导出 JSON 配置或生成可直接使用的 React 源代码
+- **业务赋能**：支持在线发布链接，非技术人员通过简单的拖拽即可完成问卷、报销单、信息采集表的创建与发布
+- **极致解耦**：核心渲染引擎与编辑器分离，渲染器（Renderer）可作为轻量级组件集成到任何 React 业务系统中
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ 功能模块
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 可视化编辑器 (The Editor)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **物料仓库**：内置文本输入、数字、下拉选择、日期、单/多选等 AntD 常用表单组件
+- **拖拽引擎**：基于 dnd-kit 实现，支持组件排序、删除及 Grid 栅格布局的嵌套
+- **实时配置**：点击组件即可在属性面板动态修改 Label、占位符、必填项、校验规则等
+- **即时预览**：一键切换编辑/预览模式，模拟真实表单提交校验
+
+### 核心渲染引擎 (The Renderer)
+
+- **Schema 驱动**：输入标准的 JSON 配置，自动映射为 AntD 组件，保持视觉高度统一
+- **嵌套支持**：支持复杂递归布局（如 Row/Col 嵌套），能够处理深层级的表单结构
+- **导出能力**：支持导出 JSON 协议文件或纯净代码片段
+
+## 📐 运作流程
+
+1. **搭建**：在编辑器中拖拽物料，配置属性
+2. **生成**：平台自动产出描述表单结构的 JSON Schema
+3. **消费**：
+    - 方式 A：导出 JSON，在你的 React 项目中使用 `<FormRenderer schema={data} />`
+    - 方式 B：直接点击"发布"，生成在线访问地址
+
+## 🏗️ 技术架构
+
+| 技术     | 说明                                       |
+| -------- | ------------------------------------------ |
+| 框架     | React 18 + TypeScript                      |
+| 状态管理 | Zustand（轻量化、高性能处理 Schema 树）    |
+| 拖拽底座 | dnd-kit（更符合 React Hooks 思维的拖拽库） |
+| UI 库    | Ant Design 5.0                             |
+| 布局     | Tailwind CSS                               |
+
+## 🚀 快速开始
+
+### 安装依赖
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 开发模式
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+### 构建生产版本
+
+```bash
+npm run build
+```
+
+## 📅 开发路线
+
+- [ ] 动态联动逻辑：支持"配置化"字段可见性切换（例如：当 A 选中时，B 才显示）
+- [ ] 异步数据源：支持配置 Select 组件的远程 API 地址，自动发起请求填充选项
+- [ ] 多端适配：增强渲染引擎对移动端（如 Ant Design Mobile）的适配能力
+- [ ] 一键出码升级：除了 JSON，支持导出完整的 .tsx 源代码包
+
+## 📄 许可证
+
+MIT
