@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import FormRenderer from './components/Renderer';
-import type { FormItemSchema } from './types/schema';
-import { Button } from 'antd';
+import { useState } from 'react'
+import FormRenderer from './components/Renderer'
+import type { FormItemSchema } from './types/schema'
+import { Button } from 'antd'
 
 const App = () => {
     // 模拟 Store 中的数据
@@ -13,7 +13,7 @@ const App = () => {
             name: 'username',
             placeholder: '请输入用户名',
         },
-    ]);
+    ])
 
     // 模拟“拖拽添加”动作
     const addField = () => {
@@ -29,9 +29,9 @@ const App = () => {
                 ],
                 style: { width: '100%' },
             },
-        };
-        setSchemaItems([...schemaItems, newItem]);
-    };
+        }
+        setSchemaItems([...schemaItems, newItem])
+    }
 
     return (
         <div style={{ padding: 40, display: 'flex', gap: 40 }}>
@@ -46,7 +46,7 @@ const App = () => {
                 <FormRenderer items={schemaItems} />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default App;
+export default App

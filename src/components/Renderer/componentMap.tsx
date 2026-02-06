@@ -1,4 +1,4 @@
-import { Input, InputNumber, Select, Checkbox } from 'antd';
+import { Input, InputNumber, Select, Checkbox } from 'antd'
 
 // 这里将你的 Schema 类型映射到 AntD 组件
 export const ComponentMap: Record<string, any> = {
@@ -7,4 +7,4 @@ export const ComponentMap: Record<string, any> = {
     number: InputNumber,
     select: Select,
     checkbox: Checkbox,
-};
+}

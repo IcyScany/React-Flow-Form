@@ -1,7 +1,7 @@
-import type { FormItemSchema } from '../types/schema';
+import type { FormItemSchema } from '../types/schema'
 
 export interface MaterialItem extends Omit<FormItemSchema, 'id'> {
-    title: string;
+    title: string
 }
 
 export const Materials: MaterialItem[] = [
@@ -45,4 +45,4 @@ export const Materials: MaterialItem[] = [
         name: 'checkbox_field',
         defaultValue: [],
     },
-];
+]
