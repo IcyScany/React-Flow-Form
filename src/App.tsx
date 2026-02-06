@@ -1,49 +1,31 @@
-import { useState } from 'react'
 import FormRenderer from './components/Renderer'
-import type { FormItemSchema } from './types/schema'
 import { Button } from 'antd'
+import { useFormState } from './store/useFormState'
 
 const App = () => {
-    // 模拟 Store 中的数据
-    const [schemaItems, setSchemaItems] = useState<FormItemSchema[]>([
-        {
-            id: '1',
-            type: 'input',
-            label: '用户名',
-            name: 'username',
-            placeholder: '请输入用户名',
-        },
-    ])
+    const { schema, addComponent } = useFormState()
 
-    // 模拟“拖拽添加”动作
-    const addField = () => {
-        const newItem: FormItemSchema = {
-            id: Date.now().toString(), // 临时用时间戳做 ID
-            type: 'select',
-            label: '性别',
-            name: 'gender',
-            props: {
-                options: [
-                    { label: '男', value: 'male' },
-                    { label: '女', value: 'female' },
-                ],
-                style: { width: '100%' },
-            },
-        }
-        setSchemaItems([...schemaItems, newItem])
+    const handleAdd = () => {
+        addComponent({
+            id: `input_${Date.now()}`,
+            type: 'input',
+            label: '新输入框',
+            name: `field_${Date.now()}`,
+        })
     }
 
     return (
-        <div style={{ padding: 40, display: 'flex', gap: 40 }}>
-            {/* 左侧：模拟物料区 */}
-            <div style={{ width: 200, borderRight: '1px solid #eee' }}>
-                <Button onClick={addField}>模拟：添加性别下拉框</Button>
+        <div style={{ display: 'flex', height: '100vh' }}>
+            <div style={{ width: 250, borderRight: '1px solid #ddd', padding: 20 }}>
+                <Button block onClick={handleAdd}>
+                    添加输入框
+                </Button>
             </div>
 
-            {/* 中间：画布区域（渲染引擎展示处） */}
-            <div style={{ flex: 1 }}>
-                <h2>表单预览区域</h2>
-                <FormRenderer items={schemaItems} />
+            <div style={{ flex: 1, padding: 40, backgroundColor: '#f5f5f5' }}>
+                <div style={{ background: '#fff', padding: 20, minHeight: '100%' }}>
+                    <FormRenderer items={schema.items} />
+                </div>
             </div>
         </div>
     )
