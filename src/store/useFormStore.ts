@@ -11,7 +11,7 @@ interface FormState {
     updateComponentProps: (id: string, props: any) => void
 }
 
-export const useFormState = create<FormState>((set) => ({
+export const useFormStore = create<FormState>((set) => ({
     schema: {
         title: '',
         description: '',
