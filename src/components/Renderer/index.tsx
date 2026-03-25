@@ -1,8 +1,8 @@
 import React from 'react'
 import { Form } from 'antd'
 import { ComponentMap } from './componentMap'
-import type { FormItemSchema } from '../../types/schema'
-import { useFormStore } from '../../store/useFormStore'
+import type { FormItemSchema } from '@/types/schema'
+import { useFormStore } from '@/store/useFormStore'
 
 interface Props {
     items: FormItemSchema[]

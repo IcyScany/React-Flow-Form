@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { FormItemSchema, PageSchema } from '../types/schema'
+import type { FormItemSchema, PageSchema } from '@/types/schema'
 
 interface FormState {
     schema: PageSchema

@@ -1,4 +1,4 @@
-import type { FormItemSchema } from '../types/schema'
+import type { FormItemSchema } from '@/types/schema'
 
 export interface MaterialItem extends Omit<FormItemSchema, 'id'> {
     title: string

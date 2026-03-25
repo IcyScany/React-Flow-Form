@@ -1,9 +1,11 @@
-import { Form, Input, Switch, Empty, message } from 'antd'
-import { useFormStore } from '../../store/useFormStore'
+import { Form, Input, Switch, Empty, Button, Popconfirm } from 'antd'
+import { DeleteOutlined } from '@ant-design/icons'
+import { useFormStore } from '@/store/useFormStore'
 import { useEffect } from 'react'
 
 const SettingsPanel: React.FC = () => {
-    const { schema, selectedId, updateComponentProps } = useFormStore()
+    const { schema, selectedId, updateComponentProps, removeComponent } =
+        useFormStore()
     const [form] = Form.useForm()
 
     const selectedComponent = schema.items.find(
@@ -49,6 +51,10 @@ const SettingsPanel: React.FC = () => {
         updateComponentProps(selectedId, updatedData)
     }
 
+    const handleDelete = () => {
+        removeComponent(selectedId)
+    }
+
     return (
         <div style={{ padding: 20 }}>
             <h3>组件配置</h3>
@@ -74,6 +80,15 @@ const SettingsPanel: React.FC = () => {
                     <Switch />
                 </Form.Item>
             </Form>
+            <Popconfirm
+                title="删除组件"
+                description="确定删除该组件吗？"
+                onConfirm={handleDelete}
+            >
+                <Button danger block icon={<DeleteOutlined />}>
+                    删除表单项
+                </Button>
+            </Popconfirm>
         </div>
     )
 }
